@@ -22,6 +22,24 @@ services:
       timeout: 5s
       retries: 5
 
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: webscraper-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - webscraper-network
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # pgAdmin for database management (optional)
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -39,6 +57,7 @@ services:
 
 volumes:
   postgres_data:
+  redis_data:
 
 
 networks:
