@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+target/
+.gradle/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# Environment
+.env
+.env.local
+*.env
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker volumes (data persisted in containers)
+postgres_data/
+
+# Build outputs
+dist/
+*.jar
+*.war
+
+# Secrets (never commit)
+*.pem
+*.key
+secrets/
