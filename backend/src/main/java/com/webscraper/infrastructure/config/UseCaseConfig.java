@@ -9,7 +9,11 @@ import com.webscraper.application.usecase.auth.LoginUserUseCase;
 import com.webscraper.application.usecase.auth.RegisterUserUseCase;
 import com.webscraper.application.usecase.job.CancelJobUseCase;
 import com.webscraper.application.usecase.job.CreateJobUseCase;
+import com.webscraper.application.usecase.job.GetJobUseCase;
+import com.webscraper.application.usecase.job.ListJobsUseCase;
 import com.webscraper.application.usecase.targets.CreateTargetUseCase;
+import com.webscraper.application.usecase.targets.GetTargetUseCase;
+import com.webscraper.application.usecase.targets.ListTargetsUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,8 +39,28 @@ public class UseCaseConfig {
     }
 
     @Bean
+    public GetTargetUseCase getTargetUseCase(TargetRepository targetRepository) {
+        return new GetTargetUseCase(targetRepository);
+    }
+
+    @Bean
+    public ListTargetsUseCase listTargetsUseCase(TargetRepository targetRepository) {
+        return new ListTargetsUseCase(targetRepository);
+    }
+
+    @Bean
     public CreateJobUseCase createJobUseCase(JobRepository jobRepository, TargetRepository targetRepository, JobQueue jobQueue) {
         return new CreateJobUseCase(jobRepository, targetRepository, jobQueue);
+    }
+
+    @Bean
+    public GetJobUseCase getJobUseCase(JobRepository jobRepository) {
+        return new GetJobUseCase(jobRepository);
+    }
+
+    @Bean
+    public ListJobsUseCase listJobsUseCase(JobRepository jobRepository) {
+        return new ListJobsUseCase(jobRepository);
     }
 
     @Bean
