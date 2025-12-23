@@ -1,12 +1,15 @@
 package com.webscraper.infrastructure.config;
 
+import com.webscraper.application.port.out.ExportService;
 import com.webscraper.application.port.out.JobQueue;
 import com.webscraper.application.port.out.JobRepository;
+import com.webscraper.application.port.out.PageRepository;
 import com.webscraper.application.port.out.PasswordEncoder;
 import com.webscraper.application.port.out.TargetRepository;
 import com.webscraper.application.port.out.UserRepository;
 import com.webscraper.application.usecase.auth.LoginUserUseCase;
 import com.webscraper.application.usecase.auth.RegisterUserUseCase;
+import com.webscraper.application.usecase.data.ExportDataUseCase;
 import com.webscraper.application.usecase.job.CancelJobUseCase;
 import com.webscraper.application.usecase.job.CreateJobUseCase;
 import com.webscraper.application.usecase.job.GetJobUseCase;
@@ -67,4 +70,11 @@ public class UseCaseConfig {
     public CancelJobUseCase cancelJobUseCase(JobRepository jobRepository) {
         return new CancelJobUseCase(jobRepository);
     }
+
+    @Bean
+    public ExportDataUseCase exportDataUseCase(PageRepository pageRepository, TargetRepository targetRepository, 
+                                                ExportService exportService) {
+        return new ExportDataUseCase(pageRepository, targetRepository, exportService);
+    }
 }
+
